@@ -21,7 +21,12 @@
             --cream: #f2ebe0;
             --ink: #0a100e;
             --danger: #ff6b6b;
-            --hint-glow: rgba(129, 240, 195, 0.55);
+            --hint-glow: rgba(255, 235, 59, 0.65);
+            --sea-sky: #7ec8f5;
+            --sea-deep: #1a7fd4;
+            --sea-light: #5eb8f0;
+            --wood: #c4956a;
+            --wood-dark: #8b5e3c;
             --glass: rgba(255, 251, 240, 0.07);
             --glass-border: rgba(255, 235, 200, 0.14);
             --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -44,12 +49,8 @@
             color: var(--cream);
             letter-spacing: 0.03em;
             overflow-x: hidden;
-            background:
-                radial-gradient(ellipse 120% 72% at 50% -8%, rgba(232, 207, 106, 0.11), transparent 48%),
-                radial-gradient(circle at 14% 35%, rgba(42, 153, 102, 0.16), transparent 40%),
-                radial-gradient(circle at 94% 80%, rgba(8, 32, 24, 0.55), transparent 42%),
-                linear-gradient(168deg, #141c19 0%, #0e1512 52%, var(--ink) 100%);
-            background-color: var(--ink);
+            background: linear-gradient(180deg, #8ed4fa 0%, #5eb8f0 38%, #2d8fd4 100%);
+            background-color: var(--sea-light);
         }
 
         .app {
@@ -81,6 +82,186 @@
         }
 
         .screen.active { display: flex; }
+
+        /* ========== 海滨游戏场景 ========== */
+        #screen-game {
+            position: relative;
+            overflow: hidden;
+            padding: 10px 10px calc(16px + var(--safe-bottom));
+        }
+
+        #screen-game .game-ui {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .sea-scene {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .sea-sky {
+            position: absolute;
+            inset: 0 0 42%;
+            background:
+                radial-gradient(ellipse 90% 60% at 50% 0%, #fff 0%, transparent 55%),
+                linear-gradient(180deg, #b8e8ff 0%, #7ec8f5 42%, #5eb0eb 100%);
+        }
+
+        .sea-sun {
+            position: absolute;
+            top: 8%;
+            right: 18%;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff9c4 0%, #ffe082 55%, rgba(255, 224, 130, 0) 72%);
+            box-shadow: 0 0 40px rgba(255, 235, 120, 0.75);
+        }
+
+        .sea-ocean {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 48%;
+            background:
+                radial-gradient(ellipse 80% 40% at 20% 30%, rgba(255, 255, 255, 0.25), transparent 50%),
+                linear-gradient(180deg, #4db3e8 0%, #2a8fd4 35%, #1a6eb5 100%);
+        }
+
+        .sea-wave {
+            position: absolute;
+            left: -10%;
+            right: -10%;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.22);
+            filter: blur(2px);
+        }
+
+        .sea-wave.w1 { top: 8%; opacity: 0.7; }
+        .sea-wave.w2 { top: 22%; opacity: 0.45; transform: scaleX(1.1); }
+
+        .sea-island {
+            position: absolute;
+            bottom: 34%;
+            border-radius: 50% 50% 42% 42%;
+            filter: blur(1.5px);
+            opacity: 0.92;
+        }
+
+        .sea-island.i1 {
+            left: 6%;
+            width: 120px;
+            height: 52px;
+            background: linear-gradient(180deg, #6ecf8a 0%, #3d9e5f 100%);
+            box-shadow: 0 12px 24px rgba(0, 80, 60, 0.2);
+        }
+
+        .sea-island.i2 {
+            left: 22%;
+            bottom: 36%;
+            width: 70px;
+            height: 36px;
+            background: linear-gradient(180deg, #7ed99a 0%, #45a86a 100%);
+        }
+
+        .sea-house {
+            position: absolute;
+            left: 10%;
+            bottom: 38%;
+            width: 28px;
+            height: 22px;
+            background: #fff5e6;
+            border-radius: 3px 3px 0 0;
+            box-shadow: 0 2px 0 #e57373;
+        }
+
+        .sea-house::before {
+            content: "";
+            position: absolute;
+            top: -14px;
+            left: -4px;
+            width: 36px;
+            height: 16px;
+            background: #ef5350;
+            clip-path: polygon(50% 0, 100% 100%, 0 100%);
+        }
+
+        .sea-lighthouse {
+            position: absolute;
+            right: 8%;
+            bottom: 32%;
+            width: 22px;
+            height: 78px;
+            border-radius: 4px 4px 2px 2px;
+            background: repeating-linear-gradient(
+                180deg,
+                #fff 0 10px,
+                #e53935 10px 20px
+            );
+            box-shadow: 2px 8px 16px rgba(0, 0, 0, 0.25);
+        }
+
+        .sea-lighthouse::after {
+            content: "";
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 14px;
+            background: #ffd54f;
+            border-radius: 3px;
+            box-shadow: 0 0 18px rgba(255, 235, 100, 0.9);
+        }
+
+        .sea-rock {
+            position: absolute;
+            right: 5%;
+            bottom: 30%;
+            width: 48px;
+            height: 24px;
+            background: #78909c;
+            border-radius: 50% 50% 30% 30%;
+            filter: blur(0.5px);
+        }
+
+        .sea-pier {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 22%;
+            background:
+                repeating-linear-gradient(
+                    90deg,
+                    #c4956a 0,
+                    #c4956a 28px,
+                    #a67c52 28px,
+                    #a67c52 30px
+                ),
+                linear-gradient(180deg, #deb887 0%, #a67c52 100%);
+            box-shadow: inset 0 8px 20px rgba(255, 255, 255, 0.25);
+        }
+
+        .sea-pier::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.5), transparent);
+        }
 
         #screen-home h1 {
             position: relative;
@@ -133,9 +314,11 @@
             margin-top: 14px;
             margin-bottom: 0;
             max-width: min(440px, 96vw);
+            color: rgba(255, 255, 255, 0.92);
+            text-shadow: 0 1px 4px rgba(0, 60, 120, 0.5);
         }
 
-        .game-tip strong { color: var(--gold); font-weight: 700; font-variant-numeric: tabular-nums; }
+        .game-tip strong { color: #ffeb3b; font-weight: 700; font-variant-numeric: tabular-nums; }
 
         .btn {
             padding: 14px 32px;
@@ -266,35 +449,69 @@
             width: min(100%, 520px);
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 8px;
             justify-content: space-between;
-            align-items: stretch;
-            margin-bottom: 12px;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        #screen-game .btn-ghost.btn-compact {
+            background: linear-gradient(180deg, #ff6b6b, #e53935);
+            border: 2px solid rgba(255, 255, 255, 0.55);
+            color: #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            font-size: 0.7rem;
+            box-shadow: 0 4px 12px rgba(229, 57, 53, 0.45);
         }
 
         .hud-pill {
-            background: rgba(8, 12, 10, 0.55);
-            border: 1px solid rgba(232, 207, 106, 0.18);
+            background: rgba(255, 255, 255, 0.88);
+            border: 2px solid rgba(255, 255, 255, 0.95);
             border-radius: 999px;
-            padding: 8px 14px;
-            font-size: 0.76rem;
-            color: rgba(242, 235, 224, 0.78);
+            padding: 6px 12px;
+            font-size: 0.74rem;
+            color: #37474f;
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-            backdrop-filter: blur(12px);
-            box-shadow:
-                inset 0 1px 0 rgba(255, 252, 240, 0.07),
-                0 6px 20px rgba(0, 0, 0, 0.32);
+            gap: 6px;
+            box-shadow: 0 4px 14px rgba(30, 100, 160, 0.2);
             white-space: nowrap;
         }
 
-        .hud-pill strong {
-            font-size: 1.06rem;
-            color: var(--gold);
-            font-variant-numeric: tabular-nums;
-            letter-spacing: 0.03em;
+        .hud-pill.hud-level {
+            background: linear-gradient(180deg, #b388ff 0%, #7e57c2 100%);
+            border-color: rgba(255, 255, 255, 0.65);
+            color: #fff;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 8px 18px;
+            box-shadow: 0 4px 16px rgba(126, 87, 194, 0.45);
         }
+
+        .hud-pill.hud-level strong { color: #fff; }
+
+        .hud-pill.hud-score {
+            background: linear-gradient(90deg, #fff8e1, #ffe082);
+            border-color: #ffca28;
+        }
+
+        .hud-pill.hud-combo {
+            background: linear-gradient(90deg, #ffe0b2, #ffb74d);
+            border-color: #ffa726;
+        }
+
+        .hud-pill strong {
+            font-size: 1.02rem;
+            color: #e65100;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: 0.02em;
+        }
+
+        #screen-game .hud-pill strong { color: #e65100; }
+        #screen-game .hud-level strong { color: #fff; }
         .hud-pill.danger strong {
             color: var(--danger);
             animation: pulse-danger 0.75s ease-in-out infinite;
@@ -342,21 +559,20 @@
             flex: 1;
             min-width: 74px;
             padding: 10px 8px;
-            border-radius: 13px;
-            border: 1px solid rgba(232, 207, 106, 0.15);
-            background:
-                linear-gradient(165deg, rgba(40, 48, 44, 0.65) 0%, rgba(10, 14, 12, 0.75) 100%);
-            color: rgba(246, 240, 230, 0.92);
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.7);
+            background: linear-gradient(180deg, #b388ff 0%, #7e57c2 100%);
+            color: #fff;
             font-size: 0.71rem;
+            font-weight: 600;
             cursor: pointer;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 3px;
-            backdrop-filter: blur(10px);
             box-shadow:
-                inset 0 1px 0 rgba(255, 255, 255, 0.06),
-                0 8px 20px rgba(0, 0, 0, 0.35);
+                inset 0 1px 0 rgba(255, 255, 255, 0.35),
+                0 6px 18px rgba(94, 53, 177, 0.4);
             transition: transform 0.12s, border-color 0.15s;
         }
 
@@ -372,26 +588,25 @@
         .board-scaler {
             transform-origin: top center;
             margin: 0 auto;
-            filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.5));
+            filter: drop-shadow(0 16px 36px rgba(26, 90, 150, 0.35));
         }
 
         .table-frame {
-            padding: 11px;
-            border-radius: 24px;
+            padding: 10px;
+            border-radius: 20px;
             background:
-                linear-gradient(
-                    160deg,
-                    rgba(252, 244, 220, 0.38) 0%,
-                    rgba(206, 168, 120, 0.22) 12%,
-                    rgba(139, 100, 70, 0.55) 45%,
-                    rgba(55, 38, 28, 0.98) 100%
-                );
-            border: 1px solid rgba(255, 240, 220, 0.28);
+                repeating-linear-gradient(
+                    90deg,
+                    #d4a574 0,
+                    #d4a574 24px,
+                    #b8895a 24px,
+                    #b8895a 26px
+                ),
+                linear-gradient(180deg, #e8c49a 0%, #a67c52 100%);
+            border: 3px solid #f5deb3;
             box-shadow:
-                0 1px 0 rgba(255, 255, 255, 0.12) inset,
-                0 12px 0 rgba(38, 28, 22, 0.45) inset,
-                0 28px 64px rgba(0, 0, 0, 0.55),
-                0 6px 16px rgba(0, 0, 0, 0.4);
+                0 1px 0 rgba(255, 255, 255, 0.45) inset,
+                0 10px 28px rgba(80, 50, 30, 0.35);
             position: relative;
         }
 
@@ -399,33 +614,23 @@
             content: "";
             position: absolute;
             inset: 4px;
-            border-radius: 18px;
-            border: 1px solid rgba(0, 0, 0, 0.35);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 90, 43, 0.35);
             pointer-events: none;
-            opacity: 0.65;
             z-index: 0;
-            mix-blend-mode: multiply;
         }
 
         .board-wrap {
             position: relative;
             z-index: 1;
-            padding: 11px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 14px;
+            border: 3px solid rgba(255, 255, 255, 0.75);
             background:
-                radial-gradient(ellipse 120% 90% at 50% -8%, rgba(120, 255, 185, 0.12), transparent 48%),
-                radial-gradient(ellipse 90% 60% at 50% 100%, rgba(0, 0, 0, 0.52), transparent 58%),
-                linear-gradient(
-                    180deg,
-                    var(--felt-bright) 0%,
-                    var(--felt) 40%,
-                    var(--felt-dark) 92%,
-                    var(--felt-shadow) 100%
-                );
+                linear-gradient(180deg, rgba(232, 245, 255, 0.97) 0%, rgba(200, 230, 255, 0.95) 100%);
             box-shadow:
-                inset 0 22px 50px rgba(0, 0, 0, 0.45),
-                inset 0 -1px 0 rgba(255, 255, 255, 0.08);
+                inset 0 2px 12px rgba(255, 255, 255, 0.8),
+                inset 0 -4px 16px rgba(100, 160, 220, 0.15);
             overflow: visible;
         }
 
@@ -463,29 +668,106 @@
 
         .link-layer path {
             fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
+            stroke-linejoin: miter;
+            stroke-linecap: butt;
         }
 
-        @keyframes drawLine { to { stroke-dashoffset: 0; } }
-
-        .link-line-anim {
-            stroke-dasharray: 800;
-            stroke-dashoffset: 800;
-            animation: drawLine 0.4s ease forwards, linkPulse 0.6s ease 0.35s 1;
+        .link-group {
+            --path-len: 800;
         }
 
-        @keyframes linkPulse {
-            0%, 100% { stroke-width: 4; opacity: 1; }
-            50% { stroke-width: 5.5; opacity: 0.92; }
+        .link-bolt-glow {
+            stroke: rgba(255, 241, 88, 0.55);
+            stroke-width: 14;
+            filter: url(#linkGlowFilter);
+            opacity: 0;
+            animation: boltGlowIn 0.28s ease-out forwards;
+        }
+
+        @keyframes boltGlowIn {
+            from { opacity: 0; stroke-width: 6; }
+            to { opacity: 0.9; stroke-width: 14; }
+        }
+
+        .link-bolt {
+            stroke: url(#linkGrad);
+            stroke-width: 5;
+            filter: url(#linkNeon);
+            stroke-dasharray: var(--path-len);
+            stroke-dashoffset: var(--path-len);
+            animation: linkDrawCore 0.32s ease-out forwards, boltFlicker 0.12s ease-in-out 0.32s 4;
+        }
+
+        .link-bolt-inner {
+            stroke: #fffde7;
+            stroke-width: 2;
+            stroke-dasharray: var(--path-len);
+            stroke-dashoffset: var(--path-len);
+            animation: linkDrawCore 0.32s ease-out forwards;
+        }
+
+        @keyframes linkDrawCore {
+            to { stroke-dashoffset: 0; }
+        }
+
+        @keyframes boltFlicker {
+            0%, 100% { opacity: 1; stroke-width: 5; }
+            50% { opacity: 0.75; stroke-width: 4; }
+        }
+
+        .link-star {
+            fill: #ffeb3b;
+            stroke: #fff8e1;
+            stroke-width: 1;
+            filter: url(#linkNeonBright);
+            transform-origin: center;
+            transform-box: fill-box;
+            animation: linkStarPop 0.38s cubic-bezier(0.34, 1.5, 0.64, 1) 0.15s backwards,
+                linkStarSpin 1.2s linear 0.38s infinite;
+        }
+
+        @keyframes linkStarPop {
+            0% { transform: scale(0) rotate(0deg); opacity: 0; }
+            70% { transform: scale(1.4) rotate(20deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes linkStarSpin {
+            to { transform: rotate(360deg); }
         }
 
         .link-fade {
-            animation: linkFadeOut 0.35s ease forwards !important;
+            animation: linkGroupFade 0.38s ease-in forwards !important;
         }
 
-        @keyframes linkFadeOut {
-            to { opacity: 0; stroke-width: 1; }
+        .link-fade .link-bolt,
+        .link-fade .link-bolt-inner,
+        .link-fade .link-bolt-glow {
+            animation: none !important;
+        }
+
+        @keyframes linkGroupFade {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+
+        .link-spark {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            margin: -3px 0 0 -3px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 12;
+            background: #fff;
+            box-shadow: 0 0 8px #ffeb3b, 0 0 14px #ffc107;
+            animation: linkSparkPop 0.45s ease-out forwards;
+        }
+
+        @keyframes linkSparkPop {
+            0% { transform: scale(0); opacity: 1; }
+            40% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
         }
 
         #board {
@@ -503,17 +785,44 @@
         }
 
         .cell.border {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px dashed rgba(232, 207, 106, 0.18);
-            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            background: rgba(180, 215, 245, 0.35);
+            border: 1px dashed rgba(100, 160, 210, 0.35);
         }
 
         .cell.inner-empty {
-            background: rgba(0, 8, 5, 0.28);
-            box-shadow:
-                inset 0 6px 12px rgba(0, 0, 0, 0.5),
-                inset 0 -1px 0 rgba(255, 255, 255, 0.04);
+            background: rgba(210, 235, 255, 0.55);
+            border: 1px solid rgba(150, 195, 235, 0.35);
             border-radius: 7px;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        .cell.link-slot-active {
+            z-index: 3;
+            animation: linkSlotPulse 0.45s ease-in-out infinite;
+        }
+
+        .cell.link-slot-active::before {
+            content: "";
+            position: absolute;
+            inset: -3px;
+            border-radius: 9px;
+            border: 3px solid #ffeb3b;
+            box-shadow:
+                0 0 0 2px rgba(255, 235, 59, 0.5),
+                0 0 18px rgba(255, 235, 59, 0.85),
+                inset 0 0 16px rgba(255, 255, 200, 0.65);
+            animation: linkSlotShimmer 0.6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes linkSlotPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+        }
+
+        @keyframes linkSlotShimmer {
+            0%, 100% { opacity: 1; filter: brightness(1); }
+            50% { opacity: 0.85; filter: brightness(1.25); }
         }
 
         .tile {
@@ -1010,19 +1319,6 @@
             100% { transform: scale(4); opacity: 0; }
         }
 
-        .link-line {
-            stroke: #e8c547;
-            stroke: url(#linkGrad);
-            stroke-width: 4;
-        }
-
-        .link-glow {
-            stroke: rgba(255, 250, 220, 0.35);
-            stroke-width: 8;
-            opacity: 0.75;
-            filter: blur(0.2px);
-        }
-
         .toast {
             position: fixed;
             bottom: 88px;
@@ -1151,6 +1447,17 @@
             justify-content: center;
         }
 
+        #screen-home,
+        #screen-levels {
+            text-shadow: 0 1px 8px rgba(0, 70, 130, 0.45);
+        }
+
+        #screen-home .result-card,
+        #screen-levels .level-grid {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
         @media (max-width: 400px) {
             :root { --cell-w: 30px; --cell-h: 40px; --gap: 3px; }
             .tile-face { font-size: 1.2rem; }
@@ -1182,20 +1489,32 @@
 
         <!-- 游戏中 -->
         <section id="screen-game" class="screen">
+            <div class="sea-scene" aria-hidden="true">
+                <div class="sea-sky"></div>
+                <div class="sea-sun"></div>
+                <div class="sea-ocean">
+                    <div class="sea-wave w1"></div>
+                    <div class="sea-wave w2"></div>
+                </div>
+                <div class="sea-island i1"></div>
+                <div class="sea-island i2"></div>
+                <div class="sea-house"></div>
+                <div class="sea-rock"></div>
+                <div class="sea-lighthouse"></div>
+                <div class="sea-pier"></div>
+            </div>
+            <div class="game-ui">
             <div class="game-header">
-                <button class="btn btn-ghost btn-compact" id="btnPause">← 退出</button>
-                <div class="hud-pill">关卡 <strong id="levelNum">1</strong></div>
+                <button class="btn btn-ghost btn-compact" id="btnPause">←</button>
+                <div class="hud-pill hud-level">第 <strong id="levelNum">1</strong> 关</div>
                 <div class="hud-pill" id="timePill">⏱ <strong id="timeLeft">90</strong>s</div>
-                <div class="hud-pill">⭐ <strong id="scoreVal">0</strong></div>
-                <div class="hud-pill">🔥 <strong id="comboVal">0</strong></div>
+                <div class="hud-pill hud-score">得分 <strong id="scoreVal">0</strong></div>
+                <div class="hud-pill hud-combo">连击 <strong id="comboVal">0</strong></div>
             </div>
 
             <div class="tools-bar">
                 <button class="tool-btn" id="toolHint" type="button">
                     <span>💡</span><span>提示</span><span class="cd" id="hintCd"></span>
-                </button>
-                <button class="tool-btn" id="toolShuffle" type="button">
-                    <span>🔀</span><span>洗牌</span><span class="cd" id="shuffleCd">×1</span>
                 </button>
                 <button class="tool-btn" id="toolBomb" type="button">
                     <span>💣</span><span>炸弹</span><span class="cd" id="bombCd">×1</span>
@@ -1211,12 +1530,38 @@
                         <div class="fx-layer" id="fxLayer" aria-hidden="true"></div>
                         <svg id="linkSvg" class="link-layer" aria-hidden="true">
                             <defs>
-                                <linearGradient id="linkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stop-color="#fefce8"/>
-                                    <stop offset="35%" stop-color="#fde68a"/>
-                                    <stop offset="68%" stop-color="#e8cf6a"/>
-                                    <stop offset="100%" stop-color="#fcd34d"/>
+                                <linearGradient id="linkGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#fffde7"/>
+                                    <stop offset="30%" stop-color="#ffee58"/>
+                                    <stop offset="55%" stop-color="#ffeb3b"/>
+                                    <stop offset="80%" stop-color="#ffc107"/>
+                                    <stop offset="100%" stop-color="#ffab00"/>
                                 </linearGradient>
+                                <filter id="linkGlowFilter" x="-60%" y="-60%" width="220%" height="220%">
+                                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.8" result="blur"/>
+                                    <feMerge>
+                                        <feMergeNode in="blur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                                <filter id="linkNeon" x="-80%" y="-80%" width="260%" height="260%">
+                                    <feGaussianBlur in="SourceGraphic" stdDeviation="1.8" result="g"/>
+                                    <feColorMatrix in="g" type="matrix"
+                                        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 14 -4" result="c"/>
+                                    <feMerge>
+                                        <feMergeNode in="c"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                                <filter id="linkNeonBright" x="-100%" y="-100%" width="300%" height="300%">
+                                    <feGaussianBlur in="SourceGraphic" stdDeviation="2.6" result="g"/>
+                                    <feColorMatrix in="g" type="matrix"
+                                        values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -5" result="c"/>
+                                    <feMerge>
+                                        <feMergeNode in="c"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
                             </defs>
                         </svg>
                         <div id="board" role="grid"></div>
@@ -1224,6 +1569,7 @@
                 </div>
             </div>
             <p class="tagline game-tip">剩余 <strong id="remainVal">36</strong> 张 · 可走外围/空格连通 · 贴邻露边也可消</p>
+            </div>
         </section>
 
         <!-- 结算 -->
@@ -1261,9 +1607,9 @@
         'use strict';
 
         const CFG = {
-            COLS: 8,
-            ROWS: 8,
-            PAIRS: 32,
+            COLS: 6,
+            ROWS: 6,
+            PAIRS: 18,
             START_TIME: 90,
             MATCH_BONUS: 2,
             COMBO_BONUS: 1,
@@ -1444,18 +1790,25 @@
                 return arr;
             }
 
-            generate(level) {
-                const tiles = [];
-                for (let i = 0; i < CFG.PAIRS; i++) {
-                    const type = TILE_ICONS[Math.floor(Math.random() * TILE_ICONS.length)];
-                    const pairId = `${type}-${i}`;
-                    tiles.push(
-                        { id: makeId(), type, pairId, row: 0, col: 0 },
-                        { id: makeId(), type, pairId, row: 0, col: 0 }
-                    );
-                }
+            /** 每种牌型仅 2 张或 4 张，合计 CFG.PAIRS 对（36 张） */
+            buildTilePool() {
+                const pool = [];
+                const quadTypeCount = Math.floor(Math.random() * (CFG.PAIRS / 2 + 1));
+                const pairTypeCount = CFG.PAIRS - quadTypeCount * 2;
+                const types = this.shuffle([...TILE_ICONS]).slice(0, quadTypeCount + pairTypeCount);
 
-                this.arrangeTilesSolvable(tiles);
+                types.forEach((type, i) => {
+                    const count = i < quadTypeCount ? 4 : 2;
+                    const groupId = `${type}-${i}`;
+                    for (let k = 0; k < count; k++) {
+                        pool.push({ id: makeId(), type, pairId: groupId, row: 0, col: 0 });
+                    }
+                });
+                return pool;
+            }
+
+            generate(level) {
+                this.arrangeTilesSolvable(this.buildTilePool());
             }
 
             getEmptySlots() {
@@ -1498,11 +1851,7 @@
                 return choices.length ? choices[Math.floor(Math.random() * choices.length)] : null;
             }
 
-            arrangeTilesSolvable(tiles) {
-                this.createEmpty();
-                const pairs = this.shuffle(this.buildTypePairs(tiles));
-                const slots = this.buildSolvableSlotPairs();
-
+            placePairsOnSlots(pairs, slots) {
                 for (let i = 0; i < pairs.length; i++) {
                     const [a, b] = pairs[i];
                     const [[r1, c1], [r2, c2]] = slots[i];
@@ -1511,7 +1860,47 @@
                     this.grid[r1][c1] = a;
                     this.grid[r2][c2] = b;
                 }
+            }
+
+            arrangeTilesSolvable(tiles) {
+                this.createEmpty();
+                const pairs = this.shuffle(this.buildTypePairs(tiles));
+                const slots = this.buildSolvableSlotPairs();
+                this.placePairsOnSlots(pairs, slots);
                 return true;
+            }
+
+            /** 洗牌：同牌型占据连续格子，在盘面上聚拢 */
+            arrangeTilesGroupedByType(tiles) {
+                const byType = new Map();
+                for (const tile of tiles) {
+                    if (!byType.has(tile.type)) byType.set(tile.type, []);
+                    byType.get(tile.type).push(tile);
+                }
+
+                const types = [...byType.keys()].sort(
+                    (a, b) => TILE_ICONS.indexOf(a) - TILE_ICONS.indexOf(b)
+                );
+                this.shuffle(types);
+
+                const slots = [];
+                for (let r = 1; r <= CFG.ROWS; r++)
+                    for (let c = 1; c <= CFG.COLS; c++)
+                        slots.push([r, c]);
+
+                this.createEmpty();
+                let i = 0;
+                for (const type of types) {
+                    const list = byType.get(type);
+                    this.shuffle(list);
+                    for (const tile of list) {
+                        const [r, c] = slots[i++];
+                        tile.row = r;
+                        tile.col = c;
+                        this.grid[r][c] = tile;
+                    }
+                }
+                return i === tiles.length;
             }
 
             buildSolvableSlotPairs() {
@@ -1569,16 +1958,11 @@
 
             reshufflePositions() {
                 const tiles = this.getAllTiles();
-                if (!this.arrangeTilesSolvable(tiles)) {
-                    const slots = tiles.map(t => [t.row, t.col]);
-                    this.shuffle(slots);
-                    tiles.forEach(t => { this.grid[t.row][t.col] = null; });
-                    tiles.forEach((t, i) => {
-                        t.row = slots[i][0];
-                        t.col = slots[i][1];
-                        this.grid[t.row][t.col] = t;
-                    });
+                for (let n = 0; n < 48; n++) {
+                    this.arrangeTilesGroupedByType(tiles);
+                    if (this.findMatchablePair()) return;
                 }
+                this.arrangeTilesSolvable(tiles);
             }
 
             autoShuffleIfDeadlock() {
@@ -1724,7 +2108,6 @@
                 this.selected = null;
                 this.lock = false;
                 this.itemsUsed = 0;
-                this.shuffleLeft = 1;
                 this.bombLeft = 1;
                 this.freezeLeft = 1;
                 this.hintCooldownUntil = 0;
@@ -1763,14 +2146,12 @@
                     remainVal: document.getElementById('remainVal'),
                     levelNum: document.getElementById('levelNum'),
                     hintCd: document.getElementById('hintCd'),
-                    shuffleCd: document.getElementById('shuffleCd'),
                     bombCd: document.getElementById('bombCd'),
                     freezeCd: document.getElementById('freezeCd'),
                     homeProgress: document.getElementById('homeProgress')
                 };
 
                 this.toolHint = document.getElementById('toolHint');
-                this.toolShuffle = document.getElementById('toolShuffle');
                 this.toolBomb = document.getElementById('toolBomb');
                 this.toolFreeze = document.getElementById('toolFreeze');
             }
@@ -1788,7 +2169,6 @@
                 document.getElementById('btnFailHome').onclick = () => { this.failOverlay.classList.remove('show'); this.showScreen('home'); };
 
                 this.toolHint.onclick = () => this.useHint();
-                this.toolShuffle.onclick = () => this.useShuffle();
                 this.toolBomb.onclick = () => this.useBomb();
                 this.toolFreeze.onclick = () => this.useFreeze();
 
@@ -1839,7 +2219,6 @@
                 this.selected = null;
                 this.lock = false;
                 this.itemsUsed = 0;
-                this.shuffleLeft = 1;
                 this.bombLeft = 1;
                 this.freezeLeft = 1;
                 this.hintCooldownUntil = 0;
@@ -1892,9 +2271,6 @@
                 const hintReady = now >= this.hintCooldownUntil;
                 this.toolHint.disabled = !hintReady || this.lock;
                 this.els.hintCd.textContent = hintReady ? '' : Math.ceil((this.hintCooldownUntil - now) / 1000) + 's';
-
-                this.toolShuffle.disabled = this.shuffleLeft <= 0 || this.lock;
-                this.els.shuffleCd.textContent = '×' + this.shuffleLeft;
 
                 this.toolBomb.disabled = this.bombLeft <= 0 || this.lock;
                 this.els.bombCd.textContent = '×' + this.bombLeft;
@@ -1965,24 +2341,131 @@
                 if (defs) this.linkSvg.appendChild(defs);
             }
 
-            drawLink(path) {
+            buildLightningPath(pts) {
+                if (pts.length < 2) return '';
+                const parts = [`M${pts[0].x.toFixed(1)},${pts[0].y.toFixed(1)}`];
+                for (let i = 0; i < pts.length - 1; i++) {
+                    const a = pts[i];
+                    const b = pts[i + 1];
+                    const dx = b.x - a.x;
+                    const dy = b.y - a.y;
+                    const len = Math.hypot(dx, dy);
+                    const steps = Math.max(2, Math.ceil(len / 14));
+                    for (let s = 1; s <= steps; s++) {
+                        const t = s / steps;
+                        let x = a.x + dx * t;
+                        let y = a.y + dy * t;
+                        if (s < steps) {
+                            const amp = Math.min(7, len * 0.12);
+                            const jitter = ((i * 17 + s * 31) % 7 - 3) / 3 * amp;
+                            if (Math.abs(dx) >= Math.abs(dy)) y += jitter;
+                            else x += jitter;
+                        }
+                        parts.push(`L${x.toFixed(1)},${y.toFixed(1)}`);
+                    }
+                }
+                return parts.join(' ');
+            }
+
+            starPolygon(cx, cy, outer, inner) {
+                const pts = [];
+                for (let i = 0; i < 10; i++) {
+                    const r = i % 2 ? inner : outer;
+                    const a = -Math.PI / 2 + (i * Math.PI) / 5;
+                    pts.push(
+                        `${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`
+                    );
+                }
+                return pts.join(' ');
+            }
+
+            pathMidpoint(pts) {
+                if (pts.length >= 3) {
+                    const m = Math.floor((pts.length - 1) / 2);
+                    return {
+                        x: (pts[m].x + pts[m + 1].x) / 2,
+                        y: (pts[m].y + pts[m + 1].y) / 2
+                    };
+                }
+                return {
+                    x: (pts[0].x + pts[pts.length - 1].x) / 2,
+                    y: (pts[0].y + pts[pts.length - 1].y) / 2
+                };
+            }
+
+            highlightLinkSlot(r, c) {
+                const cell = this.boardEl.querySelector(
+                    `.cell[data-row="${r}"][data-col="${c}"]`
+                );
+                if (cell) cell.classList.add('link-slot-active');
+            }
+
+            drawLink(path, tiles) {
                 this.clearLink();
+                this.boardEl.querySelectorAll('.cell.link-slot-active').forEach(
+                    (c) => c.classList.remove('link-slot-active')
+                );
                 if (!path || path.length < 2) return;
                 const pts = path.map(([r, c]) => this.cellCenter(r, c)).filter(Boolean);
                 if (pts.length < 2) return;
-                const d = pts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
+                const d = this.buildLightningPath(pts);
 
-                const glow = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                glow.setAttribute('d', d);
-                glow.setAttribute('class', 'link-glow');
-                glow.setAttribute('fill', 'none');
-                this.linkSvg.appendChild(glow);
+                if (tiles) {
+                    tiles.forEach((t) => this.highlightLinkSlot(t.row, t.col));
+                }
 
-                const el = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                el.setAttribute('d', d);
-                el.setAttribute('class', 'link-line link-line-anim');
-                el.setAttribute('fill', 'none');
-                this.linkSvg.appendChild(el);
+                const NS = 'http://www.w3.org/2000/svg';
+                const g = document.createElementNS(NS, 'g');
+                g.setAttribute('class', 'link-group');
+
+                const addPath = (cls) => {
+                    const el = document.createElementNS(NS, 'path');
+                    el.setAttribute('d', d);
+                    el.setAttribute('fill', 'none');
+                    el.setAttribute('class', cls);
+                    g.appendChild(el);
+                    return el;
+                };
+
+                addPath('link-bolt-glow');
+                const bolt = addPath('link-bolt');
+                addPath('link-bolt-inner');
+
+                const mid = this.pathMidpoint(pts);
+                const star = document.createElementNS(NS, 'polygon');
+                star.setAttribute('points', this.starPolygon(mid.x, mid.y, 11, 5));
+                star.setAttribute('class', 'link-star');
+                g.appendChild(star);
+
+                this.linkSvg.appendChild(g);
+
+                const len = Math.ceil(bolt.getTotalLength()) || 800;
+                g.style.setProperty('--path-len', String(len));
+
+                this.spawnLinkSparks(path);
+            }
+
+            spawnLinkSparks(path) {
+                if (!this.fxLayer || path.length < 2) return;
+                const pts = path.map(([r, c]) => this.getPosInWrap(r, c)).filter(Boolean);
+                if (pts.length < 2) return;
+
+                const layer = this.fxLayer;
+                const count = Math.min(14, pts.length * 3 + 2);
+
+                for (let i = 0; i < count; i++) {
+                    const seg = Math.min(pts.length - 2, Math.floor((i / count) * (pts.length - 1)));
+                    const t = (i % 3 + 1) / 4;
+                    const x = pts[seg].x + (pts[seg + 1].x - pts[seg].x) * t;
+                    const y = pts[seg].y + (pts[seg + 1].y - pts[seg].y) * t;
+                    const spark = document.createElement('div');
+                    spark.className = 'link-spark';
+                    spark.style.left = x + 'px';
+                    spark.style.top = y + 'px';
+                    spark.style.animationDelay = (i * 0.04) + 's';
+                    layer.appendChild(spark);
+                    setTimeout(() => spark.remove(), 620);
+                }
             }
 
             clearFx() {
@@ -2001,7 +2484,7 @@
             }
 
             fadeLink() {
-                this.linkSvg.querySelectorAll('.link-line, .link-glow').forEach(el => {
+                this.linkSvg.querySelectorAll('.link-group').forEach(el => {
                     el.classList.add('link-fade');
                 });
             }
@@ -2182,7 +2665,7 @@
             resolveMatch(tile1, tile2, path, skipCombo = false) {
                 if (!path) return;
                 this.lock = true;
-                this.drawLink(path);
+                this.drawLink(path, [tile1, tile2]);
 
                 let bonusTime = CFG.MATCH_BONUS;
                 let mult = 1;
@@ -2296,23 +2779,12 @@
                 this.hintCooldownUntil = Date.now() + CFG.HINT_COOLDOWN * 1000;
 
                 const path = this.board.pathFinder.findPath(pair[0].row, pair[0].col, pair[1].row, pair[1].col);
-                this.drawLink(path);
+                this.drawLink(path, pair);
                 document.querySelectorAll('.tile').forEach(el => {
                     if (el.dataset.id === pair[0].id || el.dataset.id === pair[1].id)
                         el.classList.add('hint');
                 });
                 this.showToast('提示 -5 秒');
-                this.updateToolsUI();
-            }
-
-            useShuffle() {
-                if (this.lock || this.shuffleLeft <= 0) return;
-                this.shuffleLeft--;
-                this.itemsUsed++;
-                this.board.reshufflePositions();
-                this.board.autoShuffleIfDeadlock();
-                this.renderBoard();
-                this.showToast('棋盘已重排');
                 this.updateToolsUI();
             }
 
